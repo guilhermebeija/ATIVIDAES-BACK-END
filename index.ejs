@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Clima ao vivo</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+     <div class="container">
+        <h1>☁️ Clima ao vivo</h1>
+        <form method="POST" action="/">
+            <input type="text" name="city" placeholder="Digite a cidade..." required>
+            <button type="submit">Buscar</button>
+        </form>
+
+        <% if (error) { %>
+             <p class="error"><%= error %></p>
+        <% } %>
+
+        <% if (weather) { %>
+            <div class="weather-box">
+                <h2><%= weather.city %></h2>
+                <p><strong><%= weather.description %></strong></p>
+                <img src="http://openweathermap.org/img/wn/<%= weather.icon %>@4x.png" alt="Clima">
+                <p>Temperatura: <%= weather.temp %> °C</p>
+                <p>🥵Sensação térmica: <%= weather.feels_like %> °C</p>
+                <p>💧Umidade: <%= weather.humidity %> %</p>
+                <p>💨Vento: <%= weather.wind_speed %> m/s</p>
+                <p>🔅Índice UV: <%= weather.uv %></p>
+
+                <% if (weather.uv < 3) { %>
+                    <p>🟢Baixo (Seguro)</p>
+                <% } else if (weather.uv < 6) { %>
+                    <p>🟡Moderado (Cuidado)</p>
+                <% } else if (weather.uv < 8) { %>
+                    <p>🟠Alto (Use proteção)</p>
+                <% } else { %>
+                    <p>🔴Muito alto (Evite exposição)</p>
+                <% } %>
+              </div>
+        <% } %>
+   </div>
+</body>
+</html>
